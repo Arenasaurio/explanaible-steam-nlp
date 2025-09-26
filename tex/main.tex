@@ -1,0 +1,189 @@
+\documentclass{article}
+
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2024
+
+
+% ready for submission
+%       \usepackage{neurips_2024}
+
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+%     \usepackage[preprint]{neurips_2024}
+
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+\usepackage[final]{neurips_2024}
+
+
+% to avoid loading the natbib package, add option nonatbib:
+%    \usepackage[nonatbib]{neurips_2024}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+\usepackage[spanish]{babel} % paquete para soporte en Español
+
+
+\title{Protocolo de Proyecto: \\ Modelo Explicativo de Reseñas de Steam}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+
+\author{
+  César E.~Arenas S. \\
+  Unidad Profesional Interdisciplinaria de Ingeniería Campus Tlaxcala\\
+  Instituto Politécnico Nacional\\
+  Guillermo Valle 11, Centro, 90000 Tlaxcala de Xicohténcatl, Tlx. \\
+  \texttt{carenass2200@alumno.ipn.mx} \\
+  % examples of more authors
+  \And
+  Rodrigo Félix P. \\
+  Unidad Profesional Interdisciplinaria de Ingeniería Campus Tlaxcala\\
+  Instituto Politécnico Nacional \\
+  Guillermo Valle 11, Centro, 90000 Tlaxcala de Xicohténcatl, Tlx. \\
+  \texttt{rfelixp2100@alumno.ipn.mx} \\
+  % \AND
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\begin{abstract}
+
+% El análisis de sentimientos constituye una de las aplicaciones más relevantes del Procesamiento del Lenguaje Natural (PLN), con usos que van desde la monitorización de la reputación de marca hasta la evaluación masiva de la satisfacción de clientes. En los últimos años, el uso de arquitecturas Transformer ha permitido alcanzar niveles de precisión sin precedentes, aunque al costo de una creciente opacidad. La naturaleza de “caja negra” de estos modelos ha generado un imperativo por la Inteligencia Artificial Explicable (XAI), la cual busca transparentar y auditar los procesos de decisión de modelos de aprendizaje profundo. En este trabajo se plantea un marco metodológico para aplicar técnicas de XAI —particularmente LIME (Local Interpretable Model-agnostic Explanations) y SHAP (SHapley Additive exPlanations)— sobre un subconjunto del Steam Reviews Dataset, un corpus compuesto por reseñas de videojuegos en inglés que contiene, además de texto, metadatos como la identificación del juego, etiquetas binarias de sentimiento y métricas de utilidad asignadas por otros usuarios. El proyecto busca tanto construir un modelo de clasificación binaria altamente preciso, como analizar en profundidad los factores lingüísticos y contextuales que influyen en sus predicciones, ofreciendo así explicaciones locales y globales útiles para investigadores, desarrolladores y usuarios finales. REVISALO ES PARTE DE LO QUE ME DIO CHAT PERO QUIZE HACERLO MAS CORTO
+  En este trabajo se plantea un proyecto que en transfondo utiliza técnicas de Inteligencia Artificial Explicable o XAI, en donde tal cual en otros trabajos realizados por investigadores se busca transparentar y auditar procesos de decisión de modelos de aprendizaje profundo, pero para esta tarea se auditará el caso de un par de millones de reseñas minadas de la plataforma de videojuegos Steam. Para ello se proponen dos arquitecturas populares que se utilizan en estos modelos, LIME y SHAP.
+\end{abstract}
+
+
+\section{Introducción}
+
+Este proyecto se basa fuertemente en el tema de análisis de sentimientos, donde el enfoque es identificar y cuantificar los patrones afectivos que se pueden llegar a discernir de los textos, simulando a la revisión de un experto del área del interés sobre el texto, debido a ello su gran relevancia en los últimos años, ya que esta tecnología puede abaratar costos al operar entre millones y millones de datos. Actualmente existen diferentes niveles de granularidad entre la variedad de modelos desde predecir variables binarias sobre cada parte del texto hasta modelos más avanzados que llegan a determinar aspectos menos fáciles de ver, como es el caso de la arquitectura basada en el análisis de aspectos o ABSA. 
+
+El flujo de trabajo que se nos ha enmarcado en otra materia del semestre así como en la literatura revisada es casi el mismo, donde se aplican técnicas de normalización del texto, que incluyen varios aspectos posibles como la lematización o volverlos a su forma canónica según sea nuestro gusto aunque pensando en el mejor desempeño del modelo, después de ello el proceso consiste en separar las partes de el texto que vayamos a analizar y utilizar en lo que son los famosos tokens, de esta manera es más fácil transformarlos a vectores de relaciones semánticas o frecuencias. Por este lado de la formación de dichos vectores tenemos varias herramientas ya creadas como lo son Word2Vec, Glove o autoencoders basados en los populares transformers, que garantizan una compresión del texto mayor a lo que podría ofrecernos otros modelos.
+
+\subsection{Pregunta de Investigación}
+Teniendo todo lo mencionado anteriormente, tenemos una cuestión que fundamenta nuestro objetivo de proyecto:
+
+\textit{¿Existe manera de identificar las palabras que determinan que una reseña de videojuego sea considerada buena o mala, y que aspectos del mismo léxico ayudan a usuarios similares determinar si una reseña es útil?}
+
+\section{Trabajos Relacionados}
+\subsection{Predicción de utilidad de una reseña basada en texto}
+En ese trabajo o trabajos unos investigadores de China, Reino Unido y Australia han realizado tareas similares.Por un lado, los investigadores de Reino Unido y China, tomaron indicadores de las horas de juego al momento de realizar la  reseña, indicadores de un acceso a la beta del juego, el numero de juegos que poseía el usuario en el momento de la reseña y si fue un regalo de algún otro usuario; con esto queremos destacar que ellos utlizaron técnicas de Machine Learning para desarrollar dicho modelo desde bosques aleatorios hasta lo que el árbol de decisión por Gradient Boosting. Por otro lado tenemos a los investigadores australianos que hicieron un trabajo similar aunque usando técnicas de procesamiento de lenguaje natural, tal cual haremos similarmente pero no para predecir, si no para auditar las variables que mencionan la utilidad de la reseña y el sentimiento positivo de la misma.
+
+Del mismo lado de los investigadores australianos tienen un trabajo que tiene un enfoque similar, que se basa en la técnica de un aprendizaje semi supervisado o así le llaman ellos, donde su objetivo claro fue el identificar reseñas que son spam dentro de la plataforma de Steam, donde según ellos obtuvieron un resultado de etiquetación de spam de alrededor del 15\% de las reseñas de un conjunto de 33,450  reseñas. 
+
+\subsection{Relación estadística entre el tiempo de juego y las reseñas}
+Producto del país Austriaco tenemos este paper o trabajo donde se analizo lo que serían los tiempos de juego que se pueden obtener de alguna otra fuente y la hora exacta de la reseña misma, donde según su resumen se percataron que algunas reseñas en horarios fuera de la media, claramente eran ruido entre todo el set de reseñas.
+
+\section{Metodología de la Investigación}
+
+Se ha optado por un enfoque cuantitativo-exploratorio para abordar la cuestión. En primer lugar se trabaja con el conjunto de datos de reseñas de Steam que se extraen, limpian, eliminan los registros sin información o repetidos y se normalizan mediante diferentes técnicas de preprocesado del texto (minúsculas, eliminación de signos, lematización, tokenización). A continuación se pasa a representar las reseñas con vectores numéricos empleando modelos de embeddings de palabras y/o representaciones contextuales. Sobre estas representaciones se recurre a técnicas de Inteligencia Artificial para entender qué aspectos del texto hacen que el modelo tome un camino u otro y aportar explicaciones tanto locales como globales a los resultados.
+
+\subsection{Descripción de los datos}
+El dataset proviene del recurso de Steam Reviews Dataset alojado en Kaggle (https://www.kaggle.com/datasets/andrewmvd/steam-reviews). Contiene reseñas de millones de usuarios de Steam e incluye el texto de la reseña, como también metadatos muy variados: ID y nombre del juego, etiqueta binaria de sentimiento (Positivo/Negativo), fecha y hora de la reseña, horas jugadas antes de la reseña, si la reseña ha sido escrita durante Early Access, métricas de utilidad por otros usuarios (p.ej. cuántos la han encontrado útil o divertida). Estas variables abren la posibilidad no solo de construir modelos de clasificación de sentimiento sino también de entender qué factores contextuales y qué características del texto influyen en que las reseñas sean útiles o lo que llamamos aquí correctas a la clasificación del sentimiento de la reseña.
+
+\subsection{Instrumentos}
+Para el desarrollo del estudio se hará uso de un entorno de análisis de datos en Python. Se emplearán librerías como \texttt{NumPy} y \texttt{Pandas} para la manipulación y depuración del conjunto de datos, y \texttt{Matplotlib}/\texttt{Seaborn} para la visualización de tendencias y patrones. La fase de modelado se apoyará en \texttt{TensorFlow} o \texttt{PyTorch} para construir y entrenar modelos de clasificación de sentimiento, mientras que las herramientas \texttt{LIME} y \texttt{SHAP} se utilizarán para explicar y auditar las predicciones generadas por dichos modelos.
+
+\subsection{Procedimiento}
+El proceso comenzará con la recopilación y preparación del conjunto de datos de reseñas de Steam desde Kaggle, realizando tareas de limpieza, normalización textual y selección de variables relevantes. A continuación se diseñará un modelo supervisado que permita clasificar el sentimiento de las reseñas, considerando tanto representaciones tradicionales de texto como incrustaciones generadas por modelos preentrenados.
+
+Una vez definido, el modelo será entrenado con una porción del dataset y validado con otra, ajustando hiperparámetros y configuraciones para optimizar su rendimiento. Posteriormente se incorporarán técnicas de Inteligencia Artificial Explicable, aplicando LIME y SHAP para identificar qué términos y factores contextuales son más determinantes en cada predicción y en patrones globales.
+
+Finalmente, los resultados obtenidos incluyendo métricas de rendimiento y explicaciones generadas se analizarán de forma crítica y se documentará todo el proceso, desde la preparación de los datos hasta la interpretación de resultados, con el fin de garantizar transparencia, replicabilidad y futuras extensiones del trabajo.
+
+
+\section{Resultados esperados}
+El objetivo es obtener un modelo de clasificación binaria que sea competitivo a la hora de predecir el sentimiento de las reseñas y que alcance valores de precisión y recall competentes. A través de las técnicas de explicación, se espera además identificar patrones léxicos y contextuales que sean recurrentes y que tengan un peso decisivo en la clasificación, como el uso de adjetivos valorativos, expresiones de enfado o de agrado, así como referencias a la duración del partido. De igual forma, se quiere comprobar si hay una relación entre la utilidad percibida por la comunidad y la presencia de determinados términos o construcciones lingüísticas.
+
+\section{Conclusiones preliminares}
+De manera preliminar, creemos que el análisis de sentimientos combinado con técnicas de procesamiento de lenguaje natural puede aportar un mayor entendimiento de las valoraciones de los videojuegos. Podremos evaluar el rendimiento de nuestro clasificador y comprender los elementos lingüísticos y contextuales que hay detrás de las opiniones de los jugadores. Por tanto, se pretende abrir la puerta a futuros trabajos que optmizen cómo mostramos y filtramos las reviews en plataformas digitales, dando una transparencia de los sistemas de recomendación, así como su entendimiento y mejora.
+
+\section*{References}
+
+
+References follow the acknowledgments in the camera-ready paper. Use unnumbered first-level heading for
+the references. Any choice of citation style is acceptable as long as you are
+consistent. It is permissible to reduce the font size to \verb+small+ (9 point)
+when listing the references.
+Note that the Reference section does not count towards the page limit.
+\medskip
+
+
+{
+\small
+
+[X] MathWorks (2025) Introducción al análisis de sentimientos. Available at: 
+\url{https://la.mathworks.com/discovery/sentiment-analysis.html} 
+(Accessed: [25/09/2025]).
+
+[X] Elastic (2017) ¿Qué es el análisis de sentimiento? Guía técnica exhaustiva. 
+Available at: \url{https://www.elastic.co/es/what-is/sentiment-analysis} 
+(Accessed: [25/09/2025]).
+
+[X] Wang, Z., Chang, V.\ \& Horvath, G.\ (2021) Explaining and Predicting 
+Helpfulness and Funniness of Online Reviews on the Steam Platform. 
+{\it Journal of Global Information Management} {\bf 29}(6):1--23. 
+DOI: \url{https://doi.org/10.4018/jgim.20211101.oa16}
+
+[X] Jeffrey, R., Bian, P., Ji, F.\ \& Sweetser, P.\ (2020) The Wisdom of the 
+Gaming Crowd. {\it ANU Open Research (Australian National University)} 
+pp.\ 272--276. DOI: \url{https://doi.org/10.1145/3383668.3419915}
+
+[X] Brodschneider, V.\ \& Pirker, J.\ (2023) On the Influence of Reviews on 
+Play Activity on Steam - A Statistical Approach. In {\it 2023 IEEE Conference 
+on Games (CoG)}, pp.\ 1--5. DOI: \url{https://doi.org/10.1109/cog57401.2023.10333235}
+
+
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\section{Appendix / supplemental material}
+
+
+Optionally include supplemental material (complete proofs, additional experiments and plots) in appendix.
+All such materials \textbf{SHOULD be included in the main submission.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
