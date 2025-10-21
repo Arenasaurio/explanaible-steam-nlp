@@ -1,0 +1,20 @@
+name: stm-xai
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas
+  - jupyterlab
+  - numpy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - wordcloud
+  - pip
+
+  - pip:
+    - transformers
+    - datasets  # conda activate stm-xai
+    - lime      # conda env update --file environment.yml --prune
+    - shap      # conda env create -f environment.yml
