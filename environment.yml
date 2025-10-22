@@ -18,3 +18,5 @@ dependencies:
     - datasets  # conda activate stm-xai
     - lime      # conda env update --file environment.yml --prune
     - shap      # conda env create -f environment.yml
+    - polars
+    - langid
