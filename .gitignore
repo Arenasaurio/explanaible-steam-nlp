@@ -1,0 +1,3 @@
+# Ignorar datasets
+/data/*
+!/data/README.md
